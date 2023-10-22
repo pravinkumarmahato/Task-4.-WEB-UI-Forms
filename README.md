@@ -1,4 +1,4 @@
-# Task-4.-WEB-UI-Forms
+![SelectById](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/adb4fecd-9e6c-45ee-b36c-210c6f8e9ffb)# Task-4.-WEB-UI-Forms
 The app is build using Reactjs a javascript framework to build the Web UI form and used MDB (Bootstrap) library to design the web app 
 
 ## Task Description
@@ -74,5 +74,27 @@ Create a basic WEB UI frontend for an application that you created for #1 or #2 
 ### Step-8:
       To Deploy the Project on the github pages go to Settings > Pages > Branch select the Branch in which the code of the project pushed and click save
       It will deploy the project an display the url of the deployed project.
+      
+## Demo Images
+### Home Page
+![Home](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/10755f16-598a-471d-98e4-d8a5525020ee)
 
+### Create Server Page
+![Create](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/09424a8b-a023-4794-96c8-9345ab726f7a)
 
+### Update Server Page
+![Update](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/c896cbbc-af99-4354-b3bd-e0c9f7e34662)
+
+### Delete Server Page
+![Delete](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/a9262e88-1970-4c81-b7b5-ee250378c289)
+
+### Select All Server Page
+![Selectall](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/64260c86-1b1f-4029-b8d6-18ca87f03d8a)
+
+### Select All Server By Id Page
+![id](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/4e947281-02c1-4085-84c2-05248f73acf8)
+![SelectById](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/38ef0b7c-1952-4085-ac34-f5aee1785570)
+
+### Select All Server By name Page
+![Name](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/0c5e707b-96e9-4e4d-b31a-56d8c9d3771a)
+![SelectByName](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/ba3f239e-5c07-41bb-bc41-37ac91022af8)
