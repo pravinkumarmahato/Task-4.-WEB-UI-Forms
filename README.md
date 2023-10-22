@@ -1,4 +1,4 @@
-![SelectById](https://github.com/pravinkumarmahato/Task-4.-WEB-UI-Forms/assets/68019573/adb4fecd-9e6c-45ee-b36c-210c6f8e9ffb)# Task-4.-WEB-UI-Forms
+# Task-4.-WEB-UI-Forms
 The app is build using Reactjs a javascript framework to build the Web UI form and used MDB (Bootstrap) library to design the web app 
 
 ## Task Description
