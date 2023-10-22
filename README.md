@@ -1,9 +1,10 @@
-# Task-5.-CI-CD-Pipeline (React.js Web UI Form CI-CD)
+# Task-4.-WEB-UI-Forms
+The app is build using Reactjs a javascript framework to build the Web UI form and used MDB (Bootstrap) library to design the web app 
 
 ## Task Description
-Create a CI-CD pipeline for a sample application (built in task 1 and/or 4 above) using any CI-CD tool of your choice like Jenkins, Azure DevOps, Gitlab, Github Actions, AWS CodePipeline or any other tool of your choice. Include a code build and a docker build step in your pipeline.
+Create a basic WEB UI frontend for an application that you created for #1 or #2 using any UI framework of your choice. You should be able to create, show and delete records from your UI.
 
-## CICD Deployment link: https://pravinkumarmahato.github.io/React-CICD/
+## CICD Deployment link: https://pravinkumarmahato.github.io/Task-4.-WEB-UI-Forms/
 ## Demo video link : https://drive.google.com/file/d/1WsvZfkSG2Gloe1zt8blKgYKmHsGltZKE/view?usp=sharing
 
 ## The steps to Create Project:
@@ -67,13 +68,11 @@ Create a CI-CD pipeline for a sample application (built in task 1 and/or 4 above
         - Build app
         - Test app
         - Deploy the app to gh-pages
-        - Setup QEMU
-        - Setup Docker Buildx
-        - Login to Docker Hub
-        - Build and push Docker Image to Docker Hub
     
       Now whenever we do some change and push the code to Github Action,it will Integrate and Deploy the Code Automaticaly to the github pages.
       Then it will build docker image and push the docker image to the docker hub.
 ### Step-8:
       To Deploy the Project on the github pages go to Settings > Pages > Branch select the Branch in which the code of the project pushed and click save
       It will deploy the project an display the url of the deployed project.
+
+
