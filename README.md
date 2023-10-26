@@ -73,7 +73,6 @@ Create a basic WEB UI frontend for an application that you created for #1 or #2 
       Then it will build docker image and push the docker image to the docker hub.
 ### Step-8:
       To Deploy the Project on the github pages go to Settings > Pages > Branch select the Branch in which the code of the project pushed and click save
-      It will deploy the project an display the url of the deployed project.
       
 ## Demo Images
 ### Home Page
