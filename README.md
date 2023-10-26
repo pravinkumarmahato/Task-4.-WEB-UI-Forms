@@ -70,9 +70,9 @@ Create a basic WEB UI frontend for an application that you created for #1 or #2 
         - Deploy the app to gh-pages
     
       Now whenever we do some change and push the code to Github Action,it will Integrate and Deploy the Code Automaticaly to the github pages.
-      Then it will build docker image and push the docker image to the docker hub.
 ### Step-8:
-      To Deploy the Project on the github pages go to Settings > Pages > Branch select the Branch in which the code of the project pushed and click save
+      To Deploy the Project on the github pages go to Settings > Pages > Branch select the Branch in which the code of the project pushed and click save.
+      It will deploy the project and display the url of the deployed project.
       
 ## Demo Images
 ### Home Page
