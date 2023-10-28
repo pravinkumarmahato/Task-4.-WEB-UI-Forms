@@ -23,6 +23,8 @@ import 'cors';
 
 export const FormUI = () => {
 
+    const url = 'http://localhost:6080/servers'
+
     let [servers, setServers] = useState([])
     let [serversbyid, setServersById] = useState([])
     let [serversbyname, setServersByName] = useState([])
@@ -31,6 +33,8 @@ export const FormUI = () => {
     let [name, setName] = useState("")
     let [language, setLanguage] = useState("")
     let [framework, setFramework] = useState("")
+
+
     function reset(){
         setId("")
         setName("")
@@ -38,11 +42,18 @@ export const FormUI = () => {
         setFramework("")
     }
 
+    function assign(id, name, language, framework){
+        setId(id)
+        setName(name)
+        setLanguage(language)
+        setFramework(framework)
+    }
+
     function refreshPage(){ window.location.reload(true); }
 
     function selectServer()
     {
-        fetch('http://localhost:6080/servers')
+        fetch(url)
         .then(response => response.json())
         .then(data => setServers(data))
         .catch(err => console.log(err))
@@ -51,29 +62,49 @@ export const FormUI = () => {
     function addServer()
     {
         let data = {id,name,language,framework}
-        fetch('http://localhost:6080/servers',{
-            method: 'POST',
+
+        fetch(`${url}/${id}`,{
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:6080',
+                'Access-Control-Allow-Methods': 'GET'
             },
-            body: JSON.stringify(data)  
-        }).then((result)=>{
-            result.json().then((resp)=>{
-                console.warn("resp: ",resp)
-            })
+        }).then(response => {
+            if (response.ok)
+            {
+                window.alert("Id already exist")
+            }
+            else{
+                fetch(url,{
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)  
+                }).then((result)=>{
+                    result.json().then((resp)=>{
+                        console.warn("resp: ",resp)
+                    })
+                })
+                selectServer()
+                reset()
+                window.alert("Server object Added")
+            }
         })
-                
-        selectServer()
-        reset()
-        refreshPage()
-        window.alert("Server object Added")
+
     }
 
     function updateServer()
     {
         let data = {id,name,language,framework}
-        fetch('http://localhost:6080/servers',{
+        id = assign.id
+        name = assign.name
+        language = assign.language
+        framework = assign.framework
+        fetch(url,{
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -89,13 +120,14 @@ export const FormUI = () => {
         })
         selectServer()
         reset()
-        refreshPage()
+        // refreshPage()
         window.alert("Server object Updated")
+        setAction("All Servers")
      }
 
     function deleteServer(id)
     {
-        fetch(`http://localhost:6080/servers/${id}`,{
+        fetch(`${url}/${id}`,{
             method: 'DELETE',
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:6080',
@@ -112,7 +144,7 @@ export const FormUI = () => {
 
     function selectServerById(id)
     {
-        fetch(`http://localhost:6080/servers/${id}`,{
+        fetch(`${url}/${id}`,{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -120,10 +152,15 @@ export const FormUI = () => {
                 'Access-Control-Allow-Origin': 'http://localhost:6080',
                 'Access-Control-Allow-Methods': 'GET'
             },
-        }).then(response => response.json())
+        }).then(response => {
+            if(!response.ok){
+                throw Error('Invalid Id')
+            }
+            return response.json()})
         .then(data => setServersById(data))
         .then(data => console.warn(data))
-        .catch(err => console.log(err))
+        .catch(err => {console.log('error: ' + err.message)
+                        window.alert(err.message)})
         let setTableActions = ()=>{setTableAction("display by id")}
         setTableActions()
         reset()
@@ -131,7 +168,7 @@ export const FormUI = () => {
 
     function selectServerByName(name)
     {
-        fetch(`http://localhost:6080/servers/name/${name}`,{
+        fetch(`${url}/name/${name}`,{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -199,7 +236,7 @@ export const FormUI = () => {
         </MDBNavbar>
 
         {action==="Add Server"?
-            
+
             <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
                 <div className='header mb-3'>
                     <div className='text'>{action}</div>
@@ -216,12 +253,13 @@ export const FormUI = () => {
             </div>
                 
         :action==="Update Server"?
+
             <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
                 <div className='header mb-3'>
                     <div className='text'>{action}</div>
                 </div>
-                <form>
-                    <MDBInput className='mb-4' type='text' id='id' label='Id' value={id} onChange={(e)=>{setId(e.target.value)}} />
+                <form>                
+                    <MDBInput className='mb-4' type='text' id='id' label='Id' value={id} onChange={(e)=>{setId(e.target.value)}} disabled={true} />
                     <MDBInput className='mb-4' type='text' id='name' label='Name' value={name} onChange={(e)=>{setName(e.target.value)}} />
                     <MDBInput className='mb-4' type='text' id='language' label='Language' value={language} onChange={(e)=>{setLanguage(e.target.value)}} />
                     <MDBInput className='mb-4' type='text' id='framework' label='Framework' value={framework} onChange={(e)=>{setFramework(e.target.value)}} />
@@ -230,7 +268,9 @@ export const FormUI = () => {
                     </MDBBtn>
                 </form>
             </div>
+
         :action==="Delete Server"?
+
             <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
                 <div className='header mb-3'>
                     <div className='text'>{action}</div>
@@ -242,7 +282,9 @@ export const FormUI = () => {
                     </MDBBtn>
                 </form>
             </div>
+
         :action==="Select Server By ID"?
+
             <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
                 <div className='header mb-3'>
                     <div className='text'>{action}</div>
@@ -278,7 +320,9 @@ export const FormUI = () => {
                 :<div></div>
                 }
             </div>
+
         :action==="Select Server By Name"?
+
             <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
                 <div className='header mb-3'>
                     <div className='text'>{action}</div>
@@ -315,6 +359,7 @@ export const FormUI = () => {
                 :<div></div>
                         }
              </div>
+
         :action==="All Servers"?
             
             <div className='container col-xs-12 col-sm-11 col-md-10 col-lg-9 col-xl-9'>
@@ -328,6 +373,7 @@ export const FormUI = () => {
                             <th scope='col'>Name</th>
                             <th scope='col'>Language</th>
                             <th scope='col'>Framework</th>
+                            <th>Update</th>
                         </tr>
                     </MDBTableHead>
                     <MDBTableBody>
@@ -336,14 +382,21 @@ export const FormUI = () => {
                             <th scope='row'>{server.id}</th>
                             <td>{server.name}</td>
                             <td>{server.language}</td>
-                            <td>{server.framework}</td>                            
+                            <td>{server.framework}</td>
+                            <td>
+                                <MDBBtn className='button' type='submit' onClick={()=>{assign(server.id, server.name, server.language, server.framework); setAction("Update Server") }} block>
+                                    Update
+                                </MDBBtn>
+                            </td>                         
                         </tr>
                         )}
                     </MDBTableBody>
                 </MDBTable>
             </div>
-                :
-                <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5'>
+
+            :
+
+            <div className='container col-xs-9 col-sm-8 col-md-7 col-lg-6 col-xl-5 home'>
                 <div className='header mb-3'>
                     <div className='text'>
                         Task -4 <br/>
@@ -351,7 +404,7 @@ export const FormUI = () => {
                     </div>
                 </div>
             </div>
-                }
+        }
     </div>
   );
 }
